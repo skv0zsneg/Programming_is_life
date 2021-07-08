@@ -45,3 +45,41 @@ if __name__ == "__main__":
     print(fib(22))
     print(fib.__n_calls__)
     print(fib.__total_time__)
+    
+ 
+#  --- OTHER ---
+    @classmethod
+    def parse(cls, f):
+        """Обертка для полного парсинга SOAP ответов с заявками.
+
+        :param f: Ссылка на вызываемую функцию.
+        :type f: function
+        :return: Возвращается список, в котором содержится словарь или словари, вмещающий в себя все необходимые
+        поля заявки или заявок.
+        :rtype: list
+        """
+        @functools.wraps(f)
+        def inner(*args, **kwargs):
+            raw_response = f(*args, **kwargs)
+            bs = BeautifulSoup(raw_response, features="xml")
+            claims_list = list()
+
+            def deep(el):
+                fields = []
+                el_deep = None
+
+                for el_deep in el.find_all(True, recursive=False):
+                    fields.append({el_deep.name: deep(el_deep)})
+                return el.text if el_deep is None else fields
+
+            for claim in bs.find_all('claim'):
+                claim_fields = dict()
+                for el in claim.find_all(True, recursive=False):
+                    claim_fields.update({el.name: deep(el)})
+
+                claims_list.append(claim_fields)
+
+            return claims_list
+
+        return inner
+
