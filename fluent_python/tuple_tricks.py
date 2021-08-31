@@ -2,7 +2,9 @@ first, *center, last = range(11)
 
 print(f"{first}, {center}, {last}")  # 0, [1, 2, 3, 4, 5, 6, 7, 8, 9], 10
 
-
+"""
+    ...
+"""
 
 metro_areas = [
     ('Tokyo', 'JP', 36.933, (35.689722, 139.691667)),
@@ -22,3 +24,9 @@ for name, cc, pop, (latitude, longitude) in metro_areas:
 # Mexico City     |   19.4333 |  -99.1333
 # New York-Newark |   40.8086 |  -74.0204
 # Sao Paulo       |  -23.5478 |  -46.6358
+
+
+
+t = (1, 2, [30, 40])
+t[2] = [50, 60]  # Здесь будет ошибка, однако t изменится и примет вид (1, 2, [30, 40, 50, 60])
+# Почему так???
