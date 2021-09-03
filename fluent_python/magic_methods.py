@@ -12,6 +12,6 @@ class MySum:
         return f"{r} = {self.res}"
 
 
-res = MySum(2)
-print(res)
+res = MySum(2, 3, 4, 5, 7, 1000)
+print(res)  # 2 + 3 + 4 + 5 + 7 + 1000 = 1021
 
