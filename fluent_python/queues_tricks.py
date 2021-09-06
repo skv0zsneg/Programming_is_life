@@ -2,6 +2,8 @@ from random import choice
 from collections import deque
 from string import ascii_letters
 from time import perf_counter as pc
+import collections.abc
+
 
 
 dq = deque('iterable object', maxlen=10)
