@@ -1,2 +1,2 @@
-# Python_is_life
-Some examples of Python code for subject purpose
+# Programming_is_life
+Some examples of Python and other code for subject purpose
