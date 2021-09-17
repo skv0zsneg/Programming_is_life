@@ -9,9 +9,9 @@ prx_d = MappingProxyType(d)
 print(prx_d)  # {1: 'one', 2: 'two'}
 
 try:
-    prx_d[1] = 'ONE'  # 'mappingproxy' object does not support item assignment
+    prx_d[1] = 'ONE'
 except TypeError as e:
-    print(e)
+    print(e)  # 'mappingproxy' object does not support item assignment
 
 d.update({3: 'three'})
 print(prx_d)  # {1: 'one', 2: 'two', 3: 'three'}
