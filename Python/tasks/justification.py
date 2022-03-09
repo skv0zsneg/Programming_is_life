@@ -60,21 +60,25 @@ def justify(text: str, width: int) -> str:
     """Text justification."""
     lines: list = []
     line: str = ''
+    perv_word: str = ''
     
     words = text.split()
-    line += words[0]
+    line = words[0]
     for word in words[1:]:
         line += ' ' + word
 
         if len(line) > width:
             i = line.rfind(word)
             line = line[:i - 1]
+            perv_word = word
         
         if len(line) < width:
             ...
 
     line.append(line)
-    line = ''
+    line = perv_word
+    perv_word = ''
+    
     
     return '\n'.join(lines)
             

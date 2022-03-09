@@ -1,0 +1,11 @@
+crazy_rus = bytes('йцыфячьюжэхъз', encoding='utf-8')  # bytes - неизменяемый тип.
+
+print(crazy_rus[0], crazy_rus, sep='\n')
+# 208
+# b'\xd0\xb9\xd1\x86\xd1\x8b\xd1\x84\xd1\x8f\xd1\x87\xd1\x8c\xd1\x8e\xd0\xb6\xd1\x8d\xd1\x85\xd1\x8a\xd0\xb7'
+
+
+crazy_rus = bytearray('йцыфячьюжэхъз', encoding='utf-8')  # bytesarray - изменяемый тип.
+print(crazy_rus[0], crazy_rus, sep='\n')
+# 208
+# bytearray(b'\xd0\xb9\xd1\x86\xd1\x8b\xd1\x84\xd1\x8f\xd1\x87\xd1\x8c\xd1\x8e\xd0\xb6\xd1\x8d\xd1\x85\xd1\x8a\xd0\xb7')
