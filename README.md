@@ -1,2 +1,4 @@
 # Programming_is_life
-Some examples of Python and other code for subject purpose
+This is my open programming-education notes.
+
+Maby you can find some interesting here :) 
