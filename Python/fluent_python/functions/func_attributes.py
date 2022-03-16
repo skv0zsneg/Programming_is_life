@@ -56,3 +56,30 @@ print(print_everything.__name__)  # Имя ф-ции
 
 print(print_everything.__qualname__)  # Полное имя (с модулем) до ф-ции 
 # print_everything
+
+
+"""Если необходимо исследовать сигнатуру ф-ции можно воспользоваться методом 
+signature из модуля inspect"""
+
+from inspect import signature
+
+
+sig = signature(print_everything)
+for name, param in sig.parameters.items():
+    print(param.kind, ':', name, '=', param.default)
+    # POSITIONAL_OR_KEYWORD : default = 1
+    # VAR_POSITIONAL : args = <class 'inspect._empty'>
+    # KEYWORD_ONLY : kwdefaults = 2
+    # VAR_KEYWORD : kwargs = <class 'inspect._empty'>
+
+# <class 'inspect._empty'> обозначает не указанное значение по умолчанию.
+
+
+# Можно переписывать словарь аргументов sig с помощью метода bind
+d = {'default': 2, 'new': 3, 'kwdefaults': 4, 'kwnew': 5}
+bound_args = sig.bind(**d)
+for name, value in bound_args.arguments.items():
+    print(name, '=', value)
+    # default = 2
+    # kwdefaults = 4
+    # kwargs = {'new': 3, 'kwnew': 5}
