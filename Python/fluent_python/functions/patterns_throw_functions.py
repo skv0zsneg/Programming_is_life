@@ -36,29 +36,49 @@ class Promotion(ABC):
     @abstractmethod
     def discount(self) -> float:
         """Возвращает скидку."""
+        pass
 
 
 # Контекст
 class Order:
 
-    def __init__(self, customer: Customer, shopping_cart: ShoppingCart, promotion: Promotion = None) -> None:
+    def __init__(self, customer: Customer, 
+                 promotion: Promotion = None) -> None:
         self.customer = customer
-        self.shopping_cart = shopping_cart
         self.promotion = promotion
 
     def total(self):
         if not hasattr(self, '__total'):
-            self.__total = self.shopping_cart.total_price()
+            self.__total = self.customer.shopping_cart.total_price()
         return self.__total
     
     def due(self):
-        if not self.promotion:
+        if self.promotion is None:
             return 0
+        return self.total() - self.promotion.discount(self)
         
 
 # Конкретные стратегии
-class ManyPromotion(Promotion):
+class TenPromotion(Promotion):
 
     def discount(self, order: Order) -> float:
         """Возвращает скидку 10% если товаров больше 10."""
-        # TODO(skvozsneg): продолжить описание.
+        if order.shopping_cart.total_count > 10:
+            return order.shopping_cart.total_price * 0.1
+        return 0
+
+class FivePromotion(Promotion):
+
+    def discount(self, order: Order) -> float:
+        """Возвращает скидку 5% если товаров больше 5."""
+        if order.shopping_cart.total_count > 5:
+            return order.shopping_cart.total_price * 0.05
+        return 0
+
+
+"""
+>>> joe = Customer('joe', ShoppingCart(
+...     [Product('apple', 10, 5),
+...      Product('milk', 10, 5)]
+... ))
+"""
