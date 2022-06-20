@@ -10,8 +10,8 @@ def make_average():  # функция высшего порядка.
     def averager(new_value):  # вложенная функция
         # ф-ция averager ссылается на нелокальную и неглобальную
         # переменную series
-        nonlocal num  # перемернная num также станет свободной переменной
         series.append(new_value)
+        nonlocal num  # перемернная num также станет свободной переменной
         return sum(series) / len(series)
     
     return averager
